@@ -1,5 +1,7 @@
+import Link from "next/link";
+
 export default async function Home() {
   return (
-    <div className="w-full text-center">The Movies</div>
+    <Link href={"/movies"}>The Movies</Link>
   );
 }
