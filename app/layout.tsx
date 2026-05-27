@@ -29,7 +29,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-          <main className="w-full p-10 flex flex-1 flex-col justify-center items-center dark:bg-black">
+          <main className="w-full p-10 flex flex-1 flex-col dark:bg-black">
             {children}
           </main>
         </div>
