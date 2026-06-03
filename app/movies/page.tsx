@@ -1,24 +1,32 @@
-"use client";
+import { SearchMovies } from "./SearchMovies";
+import { Movies } from "./Movies";
+import { getMovies } from "../lib/getMovies";
+import { Suspense } from "react";
+import { OmdbResponse } from "../models/OmdbResponse";
+import { MoviesPagination } from "./MoviesPagination";
 
-import { useState } from "react";
-import { MovieForm } from "../components/MovieForm";
-import { Movies } from "../components/Movies";
-import { getMovies } from "../services/movieService";
-import { Movie } from "../models/Movie";
+type MovieAppProps = {
+  searchParams: Promise<{ q: string; page?: string }>;
+};
 
-export default function MovieApp() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+export default async function MovieApp({ searchParams }: MovieAppProps) {
+  const { q, page: pageParam } = await searchParams;
+  const page = Number(pageParam) || 1;
 
-  const searchMovie = async (text: string) => {
-    const result = await getMovies(text);
-  
-    setMovies(result);
-  }
-
+  const movies = q
+    ? await getMovies(q, page)
+    : ({
+        Search: [],
+        totalResults: "0",
+        Response: "true",
+      } satisfies OmdbResponse);
   return (
-    <div>
-      <MovieForm searchMovie={searchMovie} />
-      <Movies movies={movies} />
-    </div>
+    <>
+      <SearchMovies />
+      <Suspense fallback={<>Loading...</>}>
+        {q && <Movies movies={movies.Search} />}
+        <MoviesPagination moviesTotal={movies.totalResults} q={q} page={page} />
+      </Suspense>
+    </>
   );
 }
