@@ -1,4 +1,4 @@
-import { MovieImg } from "@/app/components/MovieImg";
+import { MovieImg } from "@/app/components/movies/MovieImg";
 import { getMovieById } from "@/app/services/movieService";
 
 type MovieDetailsProps = {

@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Movie } from "../models/Movie";
 import { PiImageBroken } from "react-icons/pi";
 import Image from "next/image";
+import { Movie } from "@/app/models/Movie";
 
 type MovieImgProps = {
   movie: Movie;
