@@ -13,16 +13,16 @@ export const MovieImg = ({ movie }: MovieImgProps) => {
   const [srcErr, setSrcErr] = useState(false);
 
   return (
-    <div className="h-full flex justify-center items-center text-6xl text-zinc-600 bg-zinc-300">
+    <div className="flex justify-center items-center bg-zinc-300">
       {srcErr || !movie.Poster || movie.Poster === "N/A" ? (
-        <PiImageBroken />
+        <PiImageBroken className="text-6xl text-zinc-600" />
       ) : (
         <Image
           src={movie.Poster}
           alt={movie.Title}
-          width={100}
-          height={100}
-          className="w-auto"
+          width={500}
+          height={500}
+          className="w-auto h-100"
           loading="eager"
           onError={() => setSrcErr(true)}
         />

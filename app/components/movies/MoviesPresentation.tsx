@@ -1,27 +1,23 @@
 import Link from "next/link";
 import { MovieImg } from "./MovieImg";
-import { getMovies } from "@/app/services/movieService";
 import { Button } from "../Button";
+import { Movie } from "@/app/models/Movie";
 
 type MoviesPresentationProps = {
-  query: string;
+  movies: Movie[];
 };
 
-export const MoviesPresentation = async ({
-  query,
-}: MoviesPresentationProps) => {
-  const movies = await getMovies(query);
-
-  return (
-    <section className="flex flex-wrap gap-5">
-      {movies.map((m) => (
-        <div key={m.imdbID} className="border">
-          <Link href={`/movies/${m.imdbID}`}>
-            <MovieImg movie={m} />
-          </Link>
+export const MoviesPresentation = ({ movies }: MoviesPresentationProps) => (
+  <section className="w-full flex flex-wrap justify-center gap-5">
+    {movies.map((m) => (
+      <div key={m.imdbID} className="flex flex-col items-center">
+        <Link href={`/movies/${m.imdbID}`}>
+          <MovieImg movie={m} />
+        </Link>
+        <div className="w-full flex justify-end bg-black">
           <Button movie={m}></Button>
         </div>
-      ))}
-    </section>
-  );
-};
+      </div>
+    ))}
+  </section>
+);

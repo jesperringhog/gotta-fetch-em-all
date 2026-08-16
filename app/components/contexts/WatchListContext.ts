@@ -3,10 +3,7 @@ import React, { createContext } from "react";
 
 export type WatchListContextType = {
   watchList: Movie[];
-  setWatchList: (movies: Movie[]) => void;
+  setWatchList: React.Dispatch<React.SetStateAction<Movie[]>>;
 };
 
-export const WatchListContext = createContext<WatchListContextType>({
-  watchList: [],
-  setWatchList: (movies: Movie[]) => {},
-});
+export const WatchListContext = createContext<WatchListContextType | null>(null)

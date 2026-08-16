@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { useContext } from "react";
 import { WatchListContext } from "./contexts/WatchListContext";
+import { useWatchList } from "./hooks/useWatchList";
 
 export const Header = () => {
-  const { watchList } = useContext(WatchListContext);
+  const { watchList } = useWatchList();
 
   return (
     <header className="p-5 border">
@@ -12,8 +13,10 @@ export const Header = () => {
         <Link href="/" className="flex-1">
           The Movies
         </Link>
-        <Link href="/watchlist">Watchlist</Link>
-        <span>{watchList.length}</span>
+        <div className="flex gap-2">
+          <Link href="/watchlist">Watchlist</Link>
+          <span>{watchList.length}</span>
+        </div>
       </nav>
     </header>
   );
